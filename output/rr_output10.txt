@@ -1,0 +1,31 @@
+=== Banker's algorithm input values ===
+algorithm = Resource-Request
+m = 3
+n = 5
+work = [2,3,0]
+alloc = [
+0,1,0
+3,0,2
+3,0,2
+2,1,1
+0,0,2
+]
+max = [
+7,5,3
+3,2,2
+9,0,2
+2,2,2
+4,3,3
+]
+need = [
+7,4,3
+0,2,0
+6,0,0
+0,1,1
+4,3,1
+]
+finish = [0,0,0,0,0]
+Request process id = 4
+request = [3,3,0]
+=== Banker's algorithm execution ===
+Error case 2: request <= available

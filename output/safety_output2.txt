@@ -1,0 +1,37 @@
+=== Banker's algorithm input values ===
+algorithm = Safety
+m = 4
+n = 5
+work = [0,3,0,1]
+alloc = [
+0,1,1,0
+1,2,3,1
+1,3,6,5
+0,6,3,2
+0,0,1,4
+]
+max = [
+0,2,1,0
+1,6,5,2
+2,3,6,6
+0,6,5,2
+0,6,5,6
+]
+need = [
+0,1,0,0
+0,4,2,1
+1,0,0,1
+0,0,2,0
+0,6,4,2
+]
+finish = [0,0,0,0,0]
+=== Banker's algorithm execution ===
+=== Step 0 ===
+work = [0,3,0,1]
+finish = [0,0,0,0,0]
+=== Step 1 ===
+work = [0,4,1,1]
+finish = [1,0,0,0,0]
+=== Banker's algorithm result ===
+The system is not safe
+seq = [0]

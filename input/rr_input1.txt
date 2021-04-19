@@ -1,0 +1,44 @@
+# The input file for banker's algorithm
+# Empty lines and lines starting with '#' are ignored
+
+# file format:
+# Line 1 describes the algorithm
+# Line 2 is the number of resource type (m)
+# Line 3 is the number of process (n)
+# Line 4 is the available vector (m non-negative integers)
+# Line 5 to 5+n-1: Allocation matrix, each line has m non-negative integers
+# Line 5+n to 5+2n-1: Max matrix, each line has m non-negative integers
+# Line 5+2n: Request Process ID
+# Line 5+2n+1: Request vector (m non-negative integers) 
+
+# algorithm
+Resource-Request
+
+# number of resource type (m)
+4
+
+# number of process (n)
+5
+
+# available vector
+2 1 2 0
+
+# allocation matrix
+0 0 1 2
+2 0 0 0
+0 0 3 4
+2 3 5 4
+0 3 3 2
+
+# max matrix
+0 0 3 2
+2 7 5 0
+6 6 5 6
+4 3 5 6 
+0 6 5 2
+
+# request process id
+2
+
+# request vector
+0 1 2 0

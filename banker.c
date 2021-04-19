@@ -114,9 +114,9 @@ void solve_banker_algorithm() {
     // TODO: print your Banker's algorithm result
     // if algo == safety
     if (failed == 0) {
-        printf(template_safety_safe)
+        printf(template_safety_safe);
     } else {
-        printf(template_safety_not_safe)
+        printf(template_safety_not_safe);
     }
 
 }

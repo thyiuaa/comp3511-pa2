@@ -76,7 +76,7 @@ void print_mat(char *name, int mat[MAX_PROCESS][MAX_RESOURCE], int num_process, 
 int print_step(int step, int num_process, int num_resource) {
     printf(template_step_i, step);
     print_mat("work", work, num_process, num_resource);
-    print_mat("finish", finish, num_process, num_resource)
+    print_mat("finish", finish, num_process, num_resource);
 }
 int process_safe(int process) {
     for (int resource = 0; resource < num_resource; ++resource) {

@@ -73,11 +73,12 @@ void print_vec(char *name, int vec[MAX_RESOURCE], int n);
 // print a matrix - it maybe useful for you to debug
 void print_mat(char *name, int mat[MAX_PROCESS][MAX_RESOURCE], int num_process, int num_resource);
 
-int print_step(int step, int num_process, int num_resource) {
+void print_step(int step, int num_process, int num_resource) {
     printf(template_step_i, step);
     print_mat("work", work, num_process, num_resource);
     print_mat("finish", finish, num_process, num_resource);
 }
+
 int process_safe(int process) {
     for (int resource = 0; resource < num_resource; ++resource) {
         if (need[process][resource] > work[resource]) return -1;
@@ -89,7 +90,7 @@ void solve_banker_algorithm() {
     int head = 0;
     int finished = 0;
     int failed = 0;
-    print_step(finished, work, num_process, num_resource);
+    print_step(finished, num_process, num_resource);
     for (int i = 0; i < num_process; ++i) {
         int process = (head + i) % num_process;
         if (finish[process] == 1) continue;
@@ -99,7 +100,7 @@ void solve_banker_algorithm() {
             head = (process + 1) % num_process;
             finished += 1;
             failed = 0;
-            print_step(finished, work, num_process, num_resource);
+            print_step(finished, num_process, num_resource);
         } else {
             failed += 1;
         }

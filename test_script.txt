@@ -1,0 +1,37 @@
+gcc -std=c99 -o banker banker.c
+rm ./test_output/*
+./banker < ./input/safety_input1.txt > ./test_output/safety1.txt
+./banker < ./input/safety_input2.txt > ./test_output/safety2.txt
+./banker < ./input/safety_input3.txt > ./test_output/safety3.txt
+./banker < ./input/safety_input4.txt > ./test_output/safety4.txt
+./banker < ./input/safety_input5.txt > ./test_output/safety5.txt
+./banker < ./input/safety_input6.txt > ./test_output/safety6.txt
+./banker < ./input/safety_input7.txt > ./test_output/safety7.txt
+./banker < ./input/safety_input8.txt > ./test_output/safety8.txt
+
+diff -s ./output/safety_output1.txt ./test_output/safety1.txt
+diff -s ./output/safety_output2.txt ./test_output/safety2.txt
+diff -s ./output/safety_output3.txt ./test_output/safety3.txt
+diff -s ./output/safety_output4.txt ./test_output/safety4.txt
+diff -s ./output/safety_output5.txt ./test_output/safety5.txt
+diff -s ./output/safety_output6.txt ./test_output/safety6.txt
+diff -s ./output/safety_output7.txt ./test_output/safety7.txt
+diff -s ./output/safety_output8.txt ./test_output/safety8.txt
+
+./banker < ./input/rr_input1.txt > ./test_output/rr1.txt
+./banker < ./input/rr_input2.txt > ./test_output/rr2.txt
+./banker < ./input/rr_input3.txt > ./test_output/rr3.txt
+./banker < ./input/rr_input4.txt > ./test_output/rr4.txt
+./banker < ./input/rr_input5.txt > ./test_output/rr5.txt
+./banker < ./input/rr_input6.txt > ./test_output/rr6.txt
+./banker < ./input/rr_input7.txt > ./test_output/rr7.txt
+./banker < ./input/rr_input8.txt > ./test_output/rr8.txt
+
+diff -s ./output/rr_output1.txt ./test_output/rr1.txt
+diff -s ./output/rr_output2.txt ./test_output/rr2.txt
+diff -s ./output/rr_output3.txt ./test_output/rr3.txt
+diff -s ./output/rr_output4.txt ./test_output/rr4.txt
+diff -s ./output/rr_output5.txt ./test_output/rr5.txt
+diff -s ./output/rr_output6.txt ./test_output/rr6.txt
+diff -s ./output/rr_output7.txt ./test_output/rr7.txt
+diff -s ./output/rr_output8.txt ./test_output/rr8.txt

@@ -86,39 +86,85 @@ int process_safe(int process) {
     return 1;
 }
 
-void solve_banker_algorithm() {
-    int head = 0;
+int safety_finished = 0;
+int safety_failed = 0;
+void safety_algorithm() {
     int finished = 0;
     int failed = 0;
     print_step(finished, num_process, num_resource);
-    for (int i = 0; i < num_process; ++i) {
-        int process = (head + i) % num_process;
-        if (finish[process] == 1) continue;
-        if (process_safe(process) == 1) {
-            seq[finished] = process;
-            finish[process] = 1;
-            head = (process + 1) % num_process;
-            finished += 1;
-            failed = 0;
-            print_step(finished, num_process, num_resource);
-        } else {
-            failed += 1;
+    while (failed != num_process - finished){
+        for (int process = 0; process < num_process; ++process) {
+            if (finish[process] == 1) continue;
+            if (process_safe(process) == 1) {
+                seq[finished] = process;
+                finish[process] = 1;
+                for (int j = 0; j < num_resource; ++j) {
+                    work[j] += alloc[process][j];
+                }
+                finished += 1;
+                failed = 0;
+                print_step(finished, num_process, num_resource);
+                break;
+            } else {
+                failed += 1;
+            }
         }
-        if (failed == num_process - finished) break;
+    }
+    safety_finished = finished;
+    safety_failed = failed;
+}
+
+int error_need = 0;
+int error_ava = 0;
+void rr_algorithm() {
+    for (int i = 0; i < num_resource; ++i) {
+        if (request[i] > need[req_process_id][i]) {
+            error_need = 1;
+            return;
+        }
+
+        if (request[i] > work[i]) {
+            error_ava = 1;
+            return;
+        }
     }
 
+    for (int i = 0; i < num_resource; ++i) {
+        work[i] -= request[i];
+        alloc[req_process_id][i] += request[i];
+        need[req_process_id][i] -= request[i];
+    }
+    safety_algorithm();
+}
+
+void solve_banker_algorithm() {
+    if (strcmp(algorithm, "Resource-Request") != 0) {
+        safety_algorithm();
+    } else {
+        rr_algorithm();
+    }
 
     printf("=== Banker's algorithm result ===\n");
 
-
-    // TODO: print your Banker's algorithm result
-    // if algo == safety
-    if (failed == 0) {
-        printf(template_safety_safe);
+    if (strcmp(algorithm, "Resource-Request") != 0) {
+        if (safety_failed == 0) {
+            printf(template_safety_safe);
+        } else {
+            printf(template_safety_not_safe);
+        }
+        print_vec("seq", seq, safety_finished);
     } else {
-        printf(template_safety_not_safe);
+        if (error_need) printf(template_rr_error_1, req_process_id);
+        if (error_ava) printf(template_rr_error_2);
+        print_vec("request", request, num_resource);
+        if (safety_failed == 0) {
+            printf(template_rr_can_grant, req_process_id);
+        } else {
+            printf(template_rr_cannot_grant, req_process_id);
+        }
+        print_vec("seq", seq, safety_finished);
     }
-
+    // todo: Resource-Request
 }
 
 

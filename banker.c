@@ -3,17 +3,44 @@
     
     Student Name: YIU, Tung Hon
     ITSC email: thyiuaa@connect.ust.hk
-
-    TODO: Please write the explanation here (i.e. near the top of the source code)
     
-    For example:
+    (A). Safety Algorithm:
+        (1). if number of failed processes equals to number of unfinished processes
+        (2). loop through every process from the beginning
+            (2.1). if the process if finished, go to (2)
+            (2.2). if the resouces can be granted to the process
+                (2.2.1). add the process into sequence, mark it as finished, and sum up work and alloc
+                (2.2.2). increase # finished process by 1, and reset failed to 0
+                (2.2.3). goto (1)
+                (2.2.4). otherwise, increase # failed process by 1
+            (2.4). goto (1)
+        (3). end
 
-    Step 1: ....
-    Step 2: ....
-        Step 2.1: .....
-        Step 2.2: .....
-            Step 2.2.1: .....
-    Step 3: ....
+    (B). Resource-Request Algorithm:
+        (1). loop throught the request
+            (1.1). if the request of the process is greater than the needed resources of the process
+                (1.1.1). mark the error and goto (4)
+            (1.2). if the request of the process is greater than the work of the process
+                (1.2.1). mark the error and goto (4)
+        (2). loop throught the request
+            (2.1). decrease the work of the process by the requested amount
+            (2.2). increase the allocated resources of the process by the requested amount
+            (2.3). decrease the needed resources of the process by the requested amount
+        (3). run Safety Algorithm
+        (4). end
+
+    (C). Output:
+        For Safety Algorithm:
+            (1). print error if there are any, otherwise print the process sequence
+        For Resource-Request Algorithm:
+            (1). print error if there are any and print the requested resources
+            (2). print the message to tell if the resouce can be granted immediately
+            (3). print the process sequence
+
+    (D). Software:
+        (1). if the input file is for safety algorihtm, run (A)
+            (1.1). otherwise, run (B)
+        (2) run (C)
 
  */
 #define _GNU_SOURCE
@@ -164,7 +191,6 @@ void solve_banker_algorithm() {
         }
         print_vec("seq", seq, safety_finished);
     }
-    // todo: Resource-Request
 }
 
 
